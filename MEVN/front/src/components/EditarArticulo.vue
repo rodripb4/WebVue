@@ -5,8 +5,8 @@
         <h1 class="subheader">Edita Articulo</h1>
         <form class="mid-form" v-on:submit.prevent="save()">
           <div class="form-group">
-            <label for="title">Titulo</label>
-            <input type="text" name="title" v-model="article.title" />
+            <label for="title">Nombre</label>
+            <input type="text" name="title" v-model="article.nombre" />
           </div>
 
           <div class="form-group">
@@ -20,7 +20,7 @@
 
           <div class="form-group">
             <label for="content">Descripcion</label>
-            <textarea name="content" v-model="article.content" />
+            <textarea name="content" v-model="article.descripcion" />
           </div>
           <div class="form-group">
             <label for="imagen">Imagen</label>
@@ -28,7 +28,7 @@
 
             <img
               :src="url+'get-image/'+article.imagen"
-              :alt="article.title"
+              :alt="article.nombre"
               class="image-small"
               v-if="article.imagen"
             />
@@ -49,7 +49,6 @@ import { global } from "../global";
 import Articulo from "../models/Articulo";
 import axios from "axios";
 import swal from "sweetalert";
-//import {required, minLength} from 'vuelidate/lib/validators';
 export default {
   name: "EditarArticulo",
   components: {
@@ -89,13 +88,13 @@ export default {
               axios
                 .post(this.url + "upload-image/" + articleId, formData)
                 .then(res => {
-                  if (res.data.article) {
+                  if (res.data.articulo) {
                     swal(
                       "Articulo Editado",
                       "el articulo se ha editadp correctamente :)",
                       "succes"
                     );
-                    this.article = res.data.article;
+                    this.article = res.data.articulo;
 
                     this.$router.push("/articulo/" + this.article._id);
                   }
@@ -109,9 +108,9 @@ export default {
                 "el articulo se ha editado correctamente :)",
                 "success"
               );
-              this.article = res.data.article;
+              this.article = res.data.articulo;
 
-              this.$router.push("/Blog");
+              this.$router.push("/Inicio");
             }
             console.log(res.data);
           } else {
@@ -135,7 +134,7 @@ export default {
     getArticle(articleId) {
       axios.get(this.url + "articulo/" + articleId).then(res => {
         if (res.data.status == "success") {
-          this.article = res.data.article;
+          this.article = res.data.articulo;
         }
       });
     }

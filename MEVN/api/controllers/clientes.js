@@ -87,7 +87,7 @@ var controller = {
         var last = req.params.last;
 
         if (last || last != undefined) {
-            query.limit(2);
+            query.limit(3);
         }
 
         //Find sacar los datos de la bd
@@ -115,12 +115,13 @@ var controller = {
 
 
     },
+
     obtenerCliente: (req, res) => {
 
         //recoger el id de la URL
 
         var clienteId = req.params.id;
-console.log(clienteId+"IDD")
+console.log(clienteId+"ID")
         //comprobar que existe
         if (!clienteId || clienteId == null) {
             return res.status(404).send({
@@ -130,7 +131,7 @@ console.log(clienteId+"IDD")
         }
 
         //buscar el articulo
-        User.findById(clienteId, (err, cliente) => {
+        Cliente.findById(clienteId, (err, cliente) => {
 
             if (err || !cliente) {
                 return res.status(404).send({
@@ -155,7 +156,7 @@ console.log(clienteId+"IDD")
         //RECOGER EL ID DEL LA URL
         var clienteId = req.params.id;
 
-        User.findOneAndDelete({ _id: clienteId }, (err, eliminarCliente) => {
+        Cliente.findOneAndDelete({ _id: clienteId }, (err, eliminarCliente) => {
             if (err) {
                 return res.status(500).send({
                     status: 'error',
@@ -178,6 +179,68 @@ console.log(clienteId+"IDD")
 
 
     },
+
+    
+     //EDITAR ARTICULOS
+
+     editarCliente: (req, res) => {
+
+        //Recoger el ID del articulo por la URL
+
+        var clienteId = req.params.id;
+
+
+        //Regoger los datos que llegan por put 
+        var params = req.body;
+
+        //Validar datos
+
+        try {
+           var validarteDni = !validator.isEmpty(params.dni);
+            
+        } catch (err) {
+
+            return res.status(200).send({
+                status: 'error',
+                message: 'Faltan datos por enviar!!'
+            });
+
+        }
+
+        if (validarteDni) {
+            console.log("entra" + clienteId);
+            Cliente.findOneAndUpdate({ _id: clienteId }, params, { new: true }, (err, actualizarCliente) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'Error al actualizar'
+                    });
+                }
+
+
+                if (!actualizarCliente) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No existe el cliente!!'
+                    });
+                }
+                return res.status(200).send({
+                    status: 'success',
+                    cliente: actualizarCliente
+                });
+
+            });
+        } else {
+            return res.status(200).send({
+                status: 'error',
+                message: 'La validación no es correcta'
+            });
+        }
+
+
+    },
+
+
     buscarCliente: (req, res) => {
 
            //SACAR EL STRING A BUSCAR

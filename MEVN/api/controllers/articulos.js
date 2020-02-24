@@ -162,7 +162,7 @@ var controller = {
         }
 
         if (validarteNombre && validatedesc) {
-            console.log("entraa" + articuloId);
+            console.log("entra" + articuloId);
             Articulo.findOneAndUpdate({ _id: articuloId }, params, { new: true }, (err, actualizarArticulo) => {
                 if (err) {
                     return res.status(500).send({

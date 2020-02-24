@@ -14,7 +14,7 @@ import Cliente from './components/Cliente.vue';
 import Buscar from './components/Buscar.vue';
 import Redirect from './components/redirect.vue';
 import Articulo from './components/Articulo.vue';
-import ClienteGes from './components/ClienteGestion.vue';
+import EditarCliente from './components/EditarCliente.vue';
 import CrearArticulo from './components/CrearArticulo.vue';
 import CrearCliente from './components/CrearCliente.vue';
 import EditarArticulo from './components/EditarArticulo.vue';
@@ -43,7 +43,7 @@ const  routes=[
   {path:'/LastArticle', component: LastArticle},
   {path:'/Inicio', component:Inicio},
   {path:'/articulo/:id', name:'Articulo', component: Articulo},
-  {path:'/cliente/:id', name:'cliente', component: ClienteGes},
+  {path:'/Cliente/:id', name:'EditarCliente', component: EditarCliente},
   {path:'/Cliente', component:Cliente},
   {path:'/redirect/:searchString',  component:Redirect},
   {path:'/buscador/:searchString', component:Buscar},

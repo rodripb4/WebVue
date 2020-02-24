@@ -18,15 +18,6 @@
             <label for="stock">Stock</label>
             <input type="text" name="stock" v-model="article.stock" />
           </div>
-           <div class="form-group">
-    <label for="exampleFormControlSelect1">Categoria</label>
-    <select class="form-control" id="exampleFormControlSelect1" v-model="article.categoria" v-on:click.prevent="getCategori()">
-     
-      <option v-for="item of this.categori" :key="item"  >
-        {{item.title}}</option>
-
-    </select>
-  </div>
           <div class="form-group">
             <label for="content">Descripcion</label>
             <textarea name="content" v-model="article.descripcion" />
@@ -94,8 +85,8 @@ export default {
                       "el articulo se ha creado correctamente :)",
                       "success"
                     );
-                    this.article = res.data.article;
-                    this.$router.push("/Blog");
+                    this.article = res.data.articulo;
+                    this.$router.push("/Inicio");
                   }
                 })
                 .catch(err => {
@@ -108,7 +99,7 @@ export default {
                       "succes"
                     );
               this.article = res.data.article;
-              this.$router.push("/Blog");
+              this.$router.push("/Inicio");
             }
             console.log(res.data);
           }else{

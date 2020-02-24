@@ -158,24 +158,18 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>IVA %   <input  id="iva"
+              <td>IVA % <input  id="iva"
                           type="number"
-                      class="form-control col-9"
-                         v-model="iva"
-                          @click="calculoiva()"
-                      
-                        /></td>
-              
+                          class="form-control col-9"
+                          v-model="iva"/></td>
               <td>
-                
-           
-              </td>
+             </td>
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td></td>
-              <td>  TOTAL   <input id="total" type="text" class="form-control col-lg-11 " v-model="total" /></td>
+              <td>TOTAL<input id="total" type="number" class="form-control col-lg-11 " v-model="total" @click="calculoiva()"/></td>
               <td>
              
               </td>
@@ -186,7 +180,7 @@
     </div>
     <div class="clearfix"></div>
       <div>
-         <button type="button"  @click="downloadPDF" class="btn btn-dark">Download PDF</button>
+         <button type="button"  @click="downloadPDF()" class="btn btn-dark">Download PDF</button>
 
        </div>
   </div>
@@ -264,7 +258,7 @@ export default {
 
       clientes: new Cliente("", "", "", "", "", "", ""),
       articles: new Articulo("", "", "", "", ""),
-      form: new form("", "", "", 0)
+      form: new form("", "", "", "")
     };
   },
   methods: {
@@ -288,6 +282,9 @@ export default {
     return true;
      },
     
+    calcularTotal(){
+
+    },
 
     calculoslineaventa(item){
       
@@ -295,17 +292,18 @@ export default {
        for(const i  in this.lineafactura ) {
          if(this.lineafactura[i].nombre==item.nombre){
            this.lineafactura[i].precio_tota=item.precio_tota;
-           console.log( this.lineafactura[i].precio_tota+"eenntr");
+           console.log( this.lineafactura[i].precio_tota+"entra");
           
          }
-
-}
+    }
     this.calculosubtotal();
     this.calculoiva();
     },
 
 calculoiva(){
-this.total=(this.subtotal/this.iva)+this.subtotal
+var ivaaplicado=(this.iva/100)*this.subtotal
+this.total=this.subtotal+ivaaplicado
+return this.total;
 },
    
     getClientes() {
@@ -322,14 +320,14 @@ this.total=(this.subtotal/this.iva)+this.subtotal
     },
 
  agregarlineaventa(articles){
-this.cant=   document.getElementById(articles._id).value;
+this.cant=document.getElementById(articles._id).value;
 
-  this.lineafactura.push({nombre:articles.title,precio_uni: articles.precio , cant:this.cant,precio_tota:articles.precio*this.cant  });
+  this.lineafactura.push({nombre:articles.nombre,precio_uni: articles.precio , cant:this.cant,precio_tota:articles.precio*this.cant  });
  this.calculosubtotal();
  },
 
 calculosubtotal(){
-  console.log("subtotall")
+  console.log("subtotal")
   var sum=0;
  this.subtotal=0;
 for(const i  in this.lineafactura ) {

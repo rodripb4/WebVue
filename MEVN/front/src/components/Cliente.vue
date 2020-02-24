@@ -31,10 +31,10 @@
                 <td>{{clientes.telefono}}</td>
                 <td>{{clientes.email}}</td>
                 <td>
-                  <router-link :to="{name:'cliente', params:{id: cliente._id}}"><button type="button" class="btn btn-outline-primary">Editar</button></router-link>
+                  <button type="button" class="btn btn-outline-primary" @click="editarCliente(clientes._id)">Editar</button>
                 </td>
                 <td>
-                   <router-link :to="{name:'cliente', params:{id: cliente._id}}"><button type="button" class="btn btn-outline-danger">Eliminar</button></router-link> 
+                   <button @click="deleteCliente(clientes._id)"  type="button" class="btn btn-outline-danger">Eliminar</button>
                   </td>
               </tr>
             </tbody>
@@ -92,6 +92,7 @@ export default {
   mounted() {
      this.myHeaders.append('authorization', `Bearer ${localStorage.token}`),
     this.obtenerClientes();
+    this.deleteCliente();
   },
   methods: {
     mostrarusuario() {
@@ -142,6 +143,10 @@ export default {
           console.log(this.cliente);
         }
       });
+    },
+
+    editarCliente(clienteId){
+      this.$router.push("Cliente/"+clienteId);
     },
 
     deleteCliente(clienteId) {

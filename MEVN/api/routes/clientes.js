@@ -8,6 +8,7 @@ var router = express.Router();
 
 router.post('/cliente/guardar', ClienteController.nuevoCliente);
 router.get('/clientes/:last?',  ClienteController.obtenerClientes);
+router.put('/editarcliente/:id', ClienteController.editarCliente);
 router.delete('/clientes-delete/:id', ClienteController.eliminarCliente);
 router.get('/cliente-search/:search', ClienteController.buscarCliente);
 router.get('/cliente/:id', ClienteController.obtenerCliente);
