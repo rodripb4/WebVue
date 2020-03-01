@@ -27,6 +27,7 @@ var controller = {
             var validate_email = !validator.isEmpty(params.email);
             var validate_dni = !validator.isEmpty(params.dni);
             var validate_password = !validator.isEmpty(params.password);
+            var validate_rol = !validator.isEmpty(params.rol)
         } catch (err) {
           
             return res.status(200).send({
@@ -35,7 +36,7 @@ var controller = {
             });
         }
 
-        if (validateNombre && validate_password && validate_dni && validate_apellido && validate_telefono && validate_direccion && validate_email) {
+        if (validateNombre && validate_password && validate_dni && validate_apellido && validate_telefono && validate_direccion && validate_email && validate_rol) {
             //crear el objeto a guardar
             var cliente = new Cliente();
             cliente.nombre = params.nombre;
@@ -45,6 +46,7 @@ var controller = {
             cliente.email = params.email;
             cliente.dni = params.dni;
             cliente.password= params.password;
+            cliente.rol = params.rol;
 
 
 
@@ -121,7 +123,7 @@ var controller = {
         //recoger el id de la URL
 
         var clienteId = req.params.id;
-console.log(clienteId+"ID")
+         console.log(clienteId+"ID")
         //comprobar que existe
         if (!clienteId || clienteId == null) {
             return res.status(404).send({
@@ -256,6 +258,7 @@ console.log(clienteId+"ID")
                 { "dni": { "$regex": buscarString, "$options": "i" } },
                 { "direccion": { "$regex": buscarString, "$options": "i" } },
                 { "email": { "$regex": buscarString, "$options": "i" } },
+                { "rol": { "$regex": searchstring, "$options": "i" } },
 
             ]
         }).sort([['date', 'descending']]).exec((err, clientes) => {

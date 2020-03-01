@@ -10,7 +10,8 @@ var SchemaCliente = Schema({
     direccion: String,
     email:String,
     dni:String,
-    password:String
+    password:String,
+    rol:String
     });
     
     module.exports = mongoose.model('Cliente',SchemaCliente);
