@@ -14,9 +14,11 @@
                           <router-link to="/Inicio" >Articulos</router-link>
                         </li>
                         <li>
+                          <!--<li v-show="this.rol=='Administrador'">-->
                            <router-link to="/Cliente">Clientes</router-link>
                         </li>
-                        <li>  
+                        <li> 
+                          <!--<li v-show="this.rol=='Administrador'">-->
                           <router-link to="/Factura" >Facturas</router-link>
                         </li>
                         <li> <button v-on:click="cerrarsesion()">Cerrar<i class="far fa-trash-alt"></i></button>
@@ -37,10 +39,22 @@ export default {
     data:()=>({
          icons: {
         mdiAccount
-      }
+
+      },
+      rol:""
     }),
+      mounted(){
+     this.verificarol();
+    },
     name:'HeaderComponent',
      methods:{
+        verificarol(){
+     
+        this.rol= localStorage.getItem('rol');
+     console.log(this.rol+"%%%%%%%%%%%%%%")
+            
+            
+                },
          cerrarsesion(){
              localStorage.removeItem('token')
              

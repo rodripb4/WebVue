@@ -1,7 +1,6 @@
 'use strict'
-
 const User = require('../models/user')
-const service = require('../services/index')
+const service = require('../service/index')
 var f = true;
 var controlemai = true;
 

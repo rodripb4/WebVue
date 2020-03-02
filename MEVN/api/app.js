@@ -1,5 +1,4 @@
 'use strict'
-
 //cargar modulos de node  para crear el sevidor
 var express = require('express');
 var bodyParser =require('body-parser');

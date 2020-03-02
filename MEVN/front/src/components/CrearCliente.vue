@@ -31,6 +31,14 @@
             <label for="content">DNI</label>
             <input type="text" name="stock" v-model="clientes.dni" />
           </div>
+           
+          <div class="form-group">
+            <label for="content">Roles</label>
+            <select v-model="clientes.rol" class="form-control" id="exampleFormControlSelect1">
+              <option>Administrador</option>
+              <option>Cliente</option>
+            </select>
+          </div>
            <div class="form-group">
             <label for="content">Password</label>
              <input type="text" name="stock" v-model="clientes.password" />
@@ -57,7 +65,7 @@ export default {
     return {
       file: "",
       url: global.url,
-      clientes: new Cliente("", "", "", "", "", "", ""),
+      clientes: new Cliente("", "", "", "", "", "", "",""),
     };
   },
   mounted() {},

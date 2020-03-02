@@ -41,9 +41,9 @@
 <script>
 import Sidebar from "./SidebarArticulos.vue";
 import { global } from "../global";
-import Articulo from "../models/Articulo";
 import axios from "axios";
 import swal from 'sweetalert';
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   name: "CrearArticulo",
   components: {
@@ -52,75 +52,99 @@ export default {
   data() {
     return {
       file: "",
+      submitted: false,
       url: global.url,
-      article: new Articulo("", "", "", "", ""),
-       categori:[{
-
-       }]
+      article: {
+        nombre: "",
+        descripcion:"",
+        imagen: null,
+        precio:"",
+        stock:""
+      }
     };
+  },
+  validations: {
+    article: {
+      nombre: {
+        required,
+        minLength: minLength(2)
+      },
+      descripcion: {
+        required
+      }
+    }
   },
   mounted() {},
   methods: {
     guardarArticulo() {
-      console.log(this.article);
-      axios
-        .post(this.url + "guardar", this.article)
-        .then(res => {
-          if (res.data.status == "success") {
-            if (
-              this.file != null &&
-              this.file != undefined &&
-              this.file != ""
-            ) {
-              //subida del archivo, crep un formulario ficticio para poder guardat mi imagen
-              const formData = new FormData();
-              formData.append("file0", this.file, this.file.name);
-              var articleId = res.data.article._id;
-              axios
-                .post(this.url + "upload-imagen/" + articleId, formData)
-                .then(res => {
-                  if (res.data.article) {
-                    swal(
-                      "Articulo Creado",
-                      "el articulo se ha creado correctamente :)",
-                      "success"
-                    );
-                    this.article = res.data.articulo;
+      this.submitted == true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        swal(
+          "Creación fallida",
+          "El articulo no se ha creado bien :(",
+          "error"
+        );
+        return false;
+      } else {
+       console.log(this.article.stock);
+        axios
+          .post(this.url + "guardar", this.article)
+          .then(res => {
+            if (res.data.status == "success") {
+              if (
+                this.file != null &&
+                this.file != undefined &&
+                this.file != ""
+              ) {
+                //subida del archivo, crep un formulario ficticio para poder guardat mi imagen
+                const formData = new FormData();
+                formData.append("file0", this.file, this.file.name);
+                var articleId = res.data.article._id;
+                axios
+                  .post(this.url + "upload-imagen/" + articleId, formData)
+                  .then(res => {
+                    if (res.data.article) {
+                      swal(
+                        "Articulo Creado",
+                       res.data.article.message,
+                        "success"
+                      );
+                      this.article = res.data.articulo;
+                      this.$router.push("/Inicio");
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err);
                     this.$router.push("/Inicio");
-                  }
-                })
-                .catch(err => {
-                  console.log(err);
-                });
+                  });
+              } else {
+                swal(
+                  "Articulo Creado",
+                  res.data.message,
+                  "succes"
+                );
+                this.article = res.data.articulo;
+                this.$router.push("/Inicio");
+              }
+              console.log(res.data);
             } else {
-            swal(
-                      "Articulo Creado",
-                      "el articulo se ha creado correctamente :)",
-                      "succes"
-                    );
-              this.article = res.data.article;
-              this.$router.push("/Inicio");
+              swal(
+                "Creación fallida",
+                res.data.message,
+                "error"
+              );
             }
-            console.log(res.data);
-          }else{
-            swal(
-                      "Creación fallida",
-                      "El articulo no se ha creado bien :(",
-                      "error"
-                    );
-
-            
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     },
     fileChange() {
       this.file = this.$refs.file.files[0];
       console.log(this.file);
-    },
+    }
   }
- 
 };
 </script>

@@ -32,10 +32,11 @@ var controller = {
             var articulo = new Articulo();
             articulo.nombre = params.nombre;
             articulo.descripcion = params.descripcion;
+            articulo.imagen = null;
             articulo.precio = params.precio;
             articulo.stock = params.stock;
 
-            articulo.imagen = null;
+         
             //asignar valores
 
             //guardar el articulo
@@ -295,7 +296,7 @@ var controller = {
     obtenerImagen: (req, res) => {
         var file = req.params.image;
         console.log(file);
-        var path_file = './upload/' + file;
+        var path_file = './upload/articulo/' + file;
 
         fs.exists(path_file, (exists) => {
             console.log(exists);

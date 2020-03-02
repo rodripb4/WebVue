@@ -1,11 +1,16 @@
 <template>
   <div id="app" >
-    <div v-if="route!='login' && route!='registro'" >
-      <HeaderComponent></HeaderComponent>
+    <div v-if="route!='Login' && route!='Registro'" >
+
+   <HeaderComponent></HeaderComponent>
     </div>
-   
-    
+   <div class="clearfix" v-if="route!='Login' && route!='Registro'">
+   </div>
+    <div class="modal-body">
+
+   </div>
     <div class="center">
+      
       <router-view></router-view>
       
     </div>
@@ -28,8 +33,23 @@ export default {
     console.log(this.$route.name)
         return this.$route.name;
     }
-  }
-};
+  },  mounted() {
+this.verificartoken()
+  },methods:{
+    verificartoken() {
+      if (localStorage.getItem('usertoken') === undefined || localStorage.getItem('usertoken') === null) {
+  
+                 this.$router.push('/');
+          console.log("No hay token")
+      }else{
+        console.log("hay token"+localStorage.getItem('usertoken'))
+       
+      }
+    },
+ 
+  }, 
+ 
+}
 </script>
 
 <style>

@@ -48,8 +48,8 @@ export default {
     return {
       file: "",
       url: global.url,
-      cliente: new Cliente("", "", "", "", "", "", ""),
-      clientes: new Cliente("", "", "", "", "", "", ""),
+      cliente: new Cliente("", "", "", "", "", "", "", ""),
+      clientes: new Cliente("", "", "", "", "", "", "", ""),
     
       isEdit: true
     };

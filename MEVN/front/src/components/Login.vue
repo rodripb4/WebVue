@@ -78,11 +78,12 @@ import swal from "sweetalert";
   export default {
      data () {
     return {
-       searchString: null,
+      searchString: null,
       url: global.url,
       user: null,
       email:"",
       pass:"",
+      rol:"",
       body:null
     }
   },  
@@ -93,7 +94,7 @@ import swal from "sweetalert";
     methods:{
 
          onSubmit () {
-           this.body={email:this.email, password:this.pass }
+           this.body={email:this.email, password:this.pass, rol:this.rol }
         return axios({
           method: 'POST',
           url: this.url+"signin/",
@@ -103,9 +104,8 @@ import swal from "sweetalert";
           .then(response => response.data)
           .then(data => {
             
-            console.log(data)
-           
-  localStorage.setItem('token',data.token)
+            console.log(data)       
+            localStorage.setItem('token',data.token)
             setTimeout(() => {
               this.$router.push("/Inicio")
               console.log(this.$router.name)

@@ -56,6 +56,14 @@
                     :state="null"
                     v-model="clientes.dni"
                   />
+                  <v-select
+                    :items="items"
+                    label="Tipo De Usuario"
+                    name="DNI"
+                    prepend-icon="person"
+                    type="text"
+                    v-model="clientes.rol"
+                  ></v-select>
 
                   <v-text-field
                     label="Email"
@@ -99,10 +107,11 @@ export default {
   data() {
     return {
       url: global.url,
+      items: ["Administrador", "Cliente"],
       user: null,
-       body:null,
-      cliente: new Cliente("", "", "", "", "", "", ""),
-      clientes: new Cliente("", "", "", "", "", "", "")
+      body:null,
+      cliente: new Cliente("", "", "", "", "", "", "", ""),
+      clientes: new Cliente("", "", "", "", "", "", "", "")
     };
   },
   props: {
