@@ -109,9 +109,16 @@ import swal from "sweetalert";
         })
         .catch(err =>{
           localStorage.removeItem('user-token')
-          console.log(err)
+           console.log(err+"Ese usuario no existe")
+          swal({
+  title: "Usuario Invalido",
+  text: "Si no dispone de una cuenta de usuario registrese",
+  icon: "warning",
+ 
+  dangerMode: true,
         })
 
+      })
       },
 
          onSubmit () {

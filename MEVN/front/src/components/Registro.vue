@@ -11,14 +11,14 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                 <!-- <v-text-field
+                  <v-text-field
                     label="Nombre"
                     name="nombre"
                     prepend-icon="person"
                     type="text"
                     solo
                     :state="null"
-                    v-model="clientes.nombre"
+                    v-model="first_name"
                   />
                   <v-text-field
                     label="Apellidos"
@@ -27,44 +27,17 @@
                     type="text"
                     solo
                     :state="null"
-                    v-model="clientes.apellido"
+                    v-model="last_name"
                   />
                   <v-text-field
-                    label="Direccion"
+                    label="Email"
                     name="direccion"
-                    prepend-icon="home"
-                    type="text"
-                    solo
-                    :state="null"
-                    v-model="clientes.direccion"
-                  />
-                  <v-text-field
-                    label="Telefono"
-                    name="telefono"
                     prepend-icon="person"
                     type="text"
                     solo
                     :state="null"
-                    v-model="clientes.telefono"
+                    v-model="email"
                   />
-                  <v-text-field
-                    label="DNI"
-                    name="DNI"
-                    prepend-icon="person"
-                    type="text"
-                    solo
-                    :state="null"
-                    v-model="clientes.dni"
-                  />
-                  <v-select
-                    :items="items"
-                    label="Tipo De Usuario"
-                    name="DNI"
-                    prepend-icon="person"
-                    type="text"
-                    v-model="clientes.rol"
-                  ></v-select>-->
-
                   <v-text-field
                     label="Username"
                     name="login"
@@ -74,7 +47,6 @@
                     :state="null"
                     v-model="username"
                   />
-
                   <v-text-field
                     id="password"
                     label="Password"
@@ -113,7 +85,10 @@ export default {
       cliente: new Cliente("", "", "", "", "", "", "", ""),
       clientes: new Cliente("", "", "", "", "", "", "", ""),
       username:null,
-      password:null
+      password:null,
+      email:null,
+      first_name:null,
+      last_name:null,
     };
   },
   props: {
@@ -125,6 +100,10 @@ export default {
       axios.post('http://127.0.0.1:8000/api/users/',{
         username: this.username,
         password: this.password,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+
       })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));

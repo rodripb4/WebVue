@@ -100,7 +100,7 @@ export default {
                 //subida del archivo, crep un formulario ficticio para poder guardat mi imagen
                 const formData = new FormData();
                 formData.append("file0", this.file, this.file.name);
-                var articleId = res.data.article._id;
+                var articleId = res.data.articulo._id;
                 axios
                   .post(this.url + "upload-imagen/" + articleId, formData)
                   .then(res => {

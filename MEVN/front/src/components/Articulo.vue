@@ -4,7 +4,7 @@
         <article class="article-item" v-if="article">
           <div class="imgA">
             <img 
-            :src="url+'get-image/'+article.imagen" :alt="article.nombre" v-if="article.imagen" class="imgstyle"
+            :src="url+'get-imagen/'+article.imagen" :alt="article.nombre" v-if="article.imagen" class="imgstyle"
             />
           </div>
           <h1 class="subheader">{{article.nombre}}</h1>

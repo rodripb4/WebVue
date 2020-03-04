@@ -121,7 +121,7 @@ export default {
               "success"
             );
             this.clientes = res.data.cliente;
-            this.$router.push("/Blog");
+            this.$router.push("/Inicio");
           } else {
             swal(
               "Creación fallida",

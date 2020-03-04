@@ -12,7 +12,7 @@ router.get('/articulos/:last?', ControladorArticulos.obtenerArticulos);
 router.get('/articulo/:id', ControladorArticulos.obtenerArticulo);
 router.put('/articulo/:id', md_upload, ControladorArticulos.editarArticulo);
 router.delete('/articulo/:id', ControladorArticulos.eliminarArticulo);
-router.post('/upload-imagen/:id', ControladorArticulos.upload);
+router.post('/upload-imagen/:id', md_upload, ControladorArticulos.upload);
 router.get('/get-imagen/:imagen', ControladorArticulos.obtenerImagen);
 router.get('/buscar/:buscar', ControladorArticulos.buscar);
 

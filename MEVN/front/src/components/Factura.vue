@@ -2,7 +2,7 @@
   <div class="general">
 
       <section id="content">
-        <h2 class="subheader">Factura</h2>
+        <h1 class="subheader">Factura</h1>
         <br />
         <div></div>
         <div>
@@ -10,7 +10,7 @@
     </div>
 
         <form class="col-lg-12" >
-          <h5>Cliente</h5>
+          <h2>Cliente</h2>
           <div id="search" class="sidebar-item">
             <h3>Buscador</h3>
             <p>Escoga un cliente:</p>

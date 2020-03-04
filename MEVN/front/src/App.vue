@@ -48,7 +48,6 @@ export default {
                  this.$router.push('/');
           console.log("No hay token")
       }else{
-        console.log("hay token"+localStorage.getItem('usertoken'))
         this.$route.push('/Home');
        
       }

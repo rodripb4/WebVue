@@ -35,26 +35,32 @@
     mdiAccount,
    
   } from '@mdi/js'
+import Axios from 'axios';
+import Users from '../models/Users'
 export default {
     data:()=>({
          icons: {
         mdiAccount
 
       },
-      rol:""
+     user: new Users("", "", "", "", "", "", "")
     }),
       mounted(){
-     this.verificarol();
+     this.verificarRol();
     },
     name:'HeaderComponent',
      methods:{
-        verificarol(){
-     
-        this.rol= localStorage.getItem('rol');
-     console.log(this.rol+"%%%%%%%%%%%%%%")
-            
-            
-                },
+
+       verificarRol(){
+         Axios.get('http://127.0.0.1:8000/api/users/'),{
+         }.then(res =>{
+           this.Users= res.data.id;
+            console.log(res.data.Users);
+         }).catch(err =>{
+           console.log(err)
+         })
+       },
+       
          cerrarsesion(){
              localStorage.removeItem('token')
              
