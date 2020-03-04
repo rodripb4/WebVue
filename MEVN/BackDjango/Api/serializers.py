@@ -1,17 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .models import Rating
-
-class RatingSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Rating
-    fields = ('id','stars','user','video','comments')
+from django.contrib.auth.models import Permission
 
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id','username','password', 'first_name', )
+    fields = ('id','username','password', 'email', 'first_name', 'last_name', 'is_staff')
     extra_kwargs = {'password':{'write_only':True,'required':True}}
 
   def create(self, validated_data):

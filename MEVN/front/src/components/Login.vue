@@ -30,12 +30,12 @@
                 <v-form>
                   <v-text-field
                     id="text"
-                    label="Email"
+                    label="Usuario"
                     name="login"
                     prepend-icon="person"
                     type="text"
                     solo
-                    v-model="email"
+                    v-model="username"
                   />
 
                   <v-text-field
@@ -45,10 +45,10 @@
                     prepend-icon="lock"
                     type="password"
                     solo
-                     v-model="pass"
+                     v-model="password"
                   />
                 </v-form>
-                 <button class="btn btn-primary" @click="onSubmit()">Entrar</button>
+                 <button class="btn btn-primary" @click="login()">Entrar</button>
               </v-card-text>
               <v-card-actions>
                
@@ -84,7 +84,10 @@ import swal from "sweetalert";
       email:"",
       pass:"",
       rol:"",
-      body:null
+      body:null,
+      username:"",
+      password:"",
+      token: localStorage.getItem('user-token') || null,
     }
   },  
     props: {
@@ -92,6 +95,24 @@ import swal from "sweetalert";
     },
    
     methods:{
+
+      login(){
+        axios.post('http://127.0.0.1:8000/auth/',{
+          username: this.username,
+          password: this.password,
+        })
+        .then(res => {
+          this.token = res.data.token;
+          console.log(this.token)
+          localStorage.setItem('user-token', res.data.token)
+          this.$router.push("/Inicio")
+        })
+        .catch(err =>{
+          localStorage.removeItem('user-token')
+          console.log(err)
+        })
+
+      },
 
          onSubmit () {
            this.body={email:this.email, password:this.pass, rol:this.rol }

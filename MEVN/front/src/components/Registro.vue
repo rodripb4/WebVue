@@ -11,7 +11,7 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field
+                 <!-- <v-text-field
                     label="Nombre"
                     name="nombre"
                     prepend-icon="person"
@@ -63,16 +63,16 @@
                     prepend-icon="person"
                     type="text"
                     v-model="clientes.rol"
-                  ></v-select>
+                  ></v-select>-->
 
                   <v-text-field
-                    label="Email"
+                    label="Username"
                     name="login"
                     prepend-icon="person"
                     type="text"
                     solo
                     :state="null"
-                    v-model="clientes.email"
+                    v-model="username"
                   />
 
                   <v-text-field
@@ -83,13 +83,13 @@
                     type="password"
                     solo
                     :state="null"
-                    v-model="clientes.password"
+                    v-model="password"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <button class="btn btn-primary" @click="registro()"><router-link class="button is-light" to="/">Registrar</router-link></button>
+                <button class="btn btn-primary" @click="crearUsuario()"><router-link class="button is-light" to="/">Registrar</router-link></button>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -111,13 +111,27 @@ export default {
       user: null,
       body:null,
       cliente: new Cliente("", "", "", "", "", "", "", ""),
-      clientes: new Cliente("", "", "", "", "", "", "", "")
+      clientes: new Cliente("", "", "", "", "", "", "", ""),
+      username:null,
+      password:null
     };
   },
   props: {
     source: String
   },
   methods: {
+    crearUsuario(){
+      console.log(this.username)
+      axios.post('http://127.0.0.1:8000/api/users/',{
+        username: this.username,
+        password: this.password,
+      })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+      this.$router.push("/")
+
+
+    },
      registro () {
           
         return axios({
