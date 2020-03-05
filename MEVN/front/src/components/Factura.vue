@@ -1,21 +1,18 @@
 <template>
   <div class="general">
-
       <section id="content">
         <h1 class="subheader">Factura</h1>
         <br />
         <div></div>
         <div>
-       
     </div>
-
         <form class="col-lg-12" >
           <h2>Cliente</h2>
           <div id="search" class="sidebar-item">
             <h3>Buscador</h3>
             <p>Escoga un cliente:</p>
-            <form @submit.prevent="getClienteBySearch(searchString)">
-              <input type="text" name="search" v-model="searchString" />
+            <form @submit.prevent="getClienteBySearch(buscarString)">
+              <input type="text" name="search" v-model="buscarString" />
               <input type="submit" name="submit" value="Buscar" class="btn" />
                 <b-button variant="outline-primary" @click="getClientes()">Ver Todo</b-button>
             </form>
@@ -127,8 +124,8 @@
             <div id="search" class="sidebar-item">
               <h3>Buscador</h3>
               <p>Encuentra el articulo que buscas</p>
-              <form @submit.prevent="getArticleBySearch(searchString)">
-                <input type="text" name="search" v-model="searchString" />
+              <form @submit.prevent="getArticleBySearch(buscarString)">
+                <input type="text" name="search" v-model="buscarString" />
                 <input type="submit" name="submit" value="Buscar" class="btn" />
                 <b-button variant="outline-primary" @click="getArticulos()" >Ver Todo</b-button>
               </form>
@@ -153,10 +150,6 @@
       </div>
 
    <h2>  <router-link :to="{name:'article', params:{id: articles._id}}">{{articles.nombre}}</router-link> </h2>
-      <span class="date">{{articles.date | moment('from', 'now')}}
-
-       
-      </span>
 
       <h4>{{articles.precio}}€</h4>
    <router-link :to="{name:'article', params:{id: articles._id}}">Leer más</router-link>
@@ -336,7 +329,6 @@ var cemail=document.getElementById("cemail").innerHTML;
 
 var doc = new jsPDF('p', 'pt');
 doc.autoTable(columns, rows);
-doc.addImage(img.src, 'JPEG', 1, 2);
 doc.text(20, 20, 'FACTURA LOCALHOST');
 doc.autoTable(columns2, rows2);
 doc.save(cnombre+'_factura.pdf');

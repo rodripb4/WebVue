@@ -258,7 +258,7 @@ var controller = {
                 { "dni": { "$regex": buscarString, "$options": "i" } },
                 { "direccion": { "$regex": buscarString, "$options": "i" } },
                 { "email": { "$regex": buscarString, "$options": "i" } },
-                { "rol": { "$regex": searchstring, "$options": "i" } },
+                { "rol": { "$regex": buscarString, "$options": "i" } },
 
             ]
         }).sort([['date', 'descending']]).exec((err, clientes) => {
