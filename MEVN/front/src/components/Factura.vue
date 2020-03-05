@@ -17,7 +17,7 @@
             <form @submit.prevent="getClienteBySearch(searchString)">
               <input type="text" name="search" v-model="searchString" />
               <input type="submit" name="submit" value="Buscar" class="btn" />
-                <b-button variant="outline-primary" @click="getClientes()" >Ver Todo</b-button>
+                <b-button variant="outline-primary" @click="getClientes()">Ver Todo</b-button>
             </form>
           </div>
           <br />
@@ -149,7 +149,7 @@
                     <td>
                       <article class="article-item" v-for="articles in articles" :key="articles._id">
       <div class="image-wrap">
-        <img :src="url+'get-image/'+articles.imagen" :alt="articles.nombre" v-if="articles.imagen" />
+        <img :src="url+'get-imagen/'+articles.imagen" :alt="articles.nombre" v-if="articles.imagen" />
       </div>
 
    <h2>  <router-link :to="{name:'article', params:{id: articles._id}}">{{articles.nombre}}</router-link> </h2>
@@ -158,7 +158,7 @@
        
       </span>
 
-      <h4> {{articles.precio}}€</h4>
+      <h4>{{articles.precio}}€</h4>
    <router-link :to="{name:'article', params:{id: articles._id}}">Leer más</router-link>
  <td>
 
@@ -271,7 +271,7 @@ export default {
       precioS: 0,
       dialog2: false,
       showModal: false,
-      searchString: null,
+      buscarString: null,
       url: global.url,
       cliente: {
         nombre: "",
@@ -405,9 +405,9 @@ for(const i  in this.lineafactura ) {
 this.subtotal=sum;
 console.log(this.subtotal)
 },
-    getClienteBySearch(searchString) {
+    getClienteBySearch(buscarString) {
       axios
-        .get(this.url + "cliente-search/" + searchString)
+        .get(this.url + "cliente-search/" + buscarString)
         .then(res => {
           if (res.data.status == "success") {
             this.clientes = res.data.clientes;
@@ -419,8 +419,8 @@ console.log(this.subtotal)
           console.log(err);
         });
     },
-    getArticleBySearch(searchString) {
-      axios.get(this.url + "buscar/" + searchString).then(res => {
+    getArticleBySearch(buscarString) {
+      axios.get(this.url + "buscar/" + buscarString).then(res => {
         if (res.data.status == "success") {
           this.articles = res.data.articulos;
           console.log(this.articles);

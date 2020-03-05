@@ -39,8 +39,8 @@ export default {
   },
   mounted() {
     
-      var searchString= this.$route.params.searchString;
-      this.getArticleBySearch(searchString);
+      var buscarString= this.$route.params.buscarString;
+      this.getArticleBySearch(buscarString);
   },
   data() {
    
@@ -50,8 +50,8 @@ export default {
     };
   },
   methods: {
-    getArticleBySearch(searchString) {
-      axios.get(this.url+"buscar/"+searchString).then(res => {
+    getArticleBySearch(buscarString) {
+      axios.get(this.url+"buscar/"+buscarString).then(res => {
         if (res.data.status == "success") {
           this.articles = res.data.articulos;
           console.log(this.articles);

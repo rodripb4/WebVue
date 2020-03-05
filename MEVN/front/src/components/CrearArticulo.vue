@@ -82,7 +82,7 @@ export default {
       if (this.$v.$invalid) {
         swal(
           "Creación fallida",
-          "El articulo no se ha creado bien :(",
+          "El articulo no se ha creado bien ",
           "error"
         );
         return false;
@@ -108,10 +108,11 @@ export default {
                       swal(
                         "Articulo Creado",
                        res.data.article.message,
-                        "success"
+                        "success",
+                      this.article = res.data.articulo,
+                      this.$router.push("/Inicio")
                       );
-                      this.article = res.data.articulo;
-                      this.$router.push("/Inicio");
+                     
                     }
                   })
                   .catch(err => {

@@ -250,7 +250,8 @@ var controller = {
         var file_path = req.files.file0.path;
         var file_split = file_path.split('\\');
 
-        var file_name = file_split[2];
+        var file_name = file_split[1];
+        console.log(file_name);
 
         //extension del fichero 
         var extension_split = file_name.split('\.');
@@ -294,9 +295,9 @@ var controller = {
     },
 
     obtenerImagen: (req, res) => {
-        var file = req.params.image;
+        var file = req.params.imagen;
         console.log(file);
-        var path_file = './upload/articulo/' + file;
+        var path_file = './upload/' + file;
 
         fs.exists(path_file, (exists) => {
             console.log(exists);
