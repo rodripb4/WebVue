@@ -5,8 +5,8 @@
 export default {
     name:"Redirect", 
     mounted(){
-        var searchString = this.$route.params.searchString;
-        this.$router.push('/buscador/'+searchString);
+        var buscarString = this.$route.params.buscarString;
+        this.$router.push('/buscador/'+buscarString);
     }
 }
 </script>

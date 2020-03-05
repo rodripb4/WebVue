@@ -53,7 +53,7 @@ export default {
     getArticleBySearch(buscarString) {
       axios.get(this.url+"buscar/"+buscarString).then(res => {
         if (res.data.status == "success") {
-          this.articles = res.data.articulos;
+          this.articles = res.data.articulo;
           console.log(this.articles);
         }
       });

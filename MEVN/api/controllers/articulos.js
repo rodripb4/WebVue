@@ -325,10 +325,8 @@ var controller = {
             "$or": [
                 { "nombre": { "$regex": buscarString, "$options": "i" } },
                 { "descripcion": { "$regex": buscarString, "$options": "i" } },
-
             ]
-        }).sort([['date', 'descending']]).exec((err, articulos) => {
-
+        }).sort([['date', 'descending']]).exec((err, articulo) => {
 
             if (err) {
                 return res.status(500).send({
@@ -337,7 +335,7 @@ var controller = {
 
                 });
             }
-            if (!articulos || articulos.length <= 0) {
+            if (!articulo || articulo.length <= 0) {
                 return res.status(404).send({
                     status: 'error',
                     message: "No hay articulos para mostrar con tu busquedad!!"
@@ -346,7 +344,7 @@ var controller = {
             }
             return res.status(200).send({
                 status: 'success',
-                articulos
+                articulo
 
             });
         })
