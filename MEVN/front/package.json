@@ -24,7 +24,7 @@
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
     "vue-js-modal": "^1.3.31",
-    "vue-moment": "^4.0.0",
+    "vue-moment": "^4.1.0",
     "vue-pdf": "^4.0.7",
     "vue-router": "^3.1.3",
     "vuelidate": "^0.7.4",
