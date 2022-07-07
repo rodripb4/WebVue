@@ -19,7 +19,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.13",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "print-js": "^1.0.63",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
